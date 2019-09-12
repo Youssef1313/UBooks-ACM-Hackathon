@@ -1,0 +1,17 @@
+﻿@model UBooks.Models.Book
+
+@{
+
+    ViewBag.Title = "Book Information";
+}
+<h2>@ViewBag.Title:</h2>
+
+<strong>ID: </strong>@Model.Id<br/>
+<strong>Title: </strong>@Model.Title<br />
+<strong>Author: </strong>@Model.Author<br />
+<strong>Published Date: </strong>@Model.PublishDate.ToString("dd/MM/yyyy")<br />
+<strong>Advertisement Owner: </strong>@Model.AdvertisementOwner.UserName<br />
+<strong>Advertisement Date: </strong>@Model.AddedDate<br />
+<strong>Advertisement Wants To: </strong>@(Model.IsForSell ? "Sell" : "Buy") the book.<br />
+<strong>Expired Advertisement? </strong>@(Model.ExpiredAdvertisement ? "Yes" : "No")<br/>
+<strong>Description: </strong><pre>@Model.Description</pre>

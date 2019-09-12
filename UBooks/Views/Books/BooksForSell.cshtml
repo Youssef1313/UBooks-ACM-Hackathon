@@ -6,7 +6,7 @@
 
 @* Book Published Date, Advertisement Date, Author, Is Expired *@
 
-<h2>Books for sell</h2>
+<h2>@ViewBag.Title</h2>
 
 <table id="books" class="table table-bordered table-hover">
     <thead>
@@ -14,17 +14,17 @@
             <th>Title</th>
             <th>Author</th>
             <th>Advertisement Date</th>
-            <th>Is Expired</th>
+            <th>Is Expired Advertisement</th>
         </tr>
     </thead>
     <tbody>
     @foreach (var book in Model)
     {
         <tr>
-            <td>@book.Title</td>
+            <td>@Html.ActionLink(book.Title, "Details", new {id = book.Id})</td>
             <td>@book.Author</td>
             <td>@book.AddedDate</td>
-            <td>@book.ExpiredAdvertisement</td>
+            <td>@(book.ExpiredAdvertisement ? "Yes" : "No")</td>
         </tr>
     }
     </tbody>

@@ -300,6 +300,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Books\SellBook.cshtml" />
     <Content Include="Views\Books\BooksForSell.cshtml" />
+    <Content Include="Views\Books\ReadOnlyBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
