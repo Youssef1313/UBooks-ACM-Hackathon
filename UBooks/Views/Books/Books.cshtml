@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UBooks.Models.Book>
 
 @{
-    ViewBag.Title = "Books for sell";
+    ViewBag.Title = "Books for " + (ViewBag.IsForSell ? "Sell" : "Purchase");
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,7 +11,7 @@
         <tr>
             <th>Title</th>
             <th>Author</th>
-            <th>Seller</th>
+            <th>@(ViewBag.IsForSell ? "Seller" : "Buyer")</th>
             <th>Advertisement Date</th>
             <th>Is Expired Advertisement</th>
         </tr>

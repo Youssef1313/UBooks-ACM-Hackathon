@@ -63,9 +63,20 @@ namespace UBooks.Controllers
             using (var context = new ApplicationDbContext())
             {
                 var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList();
-                return View(books);
+                ViewBag.IsForSell = true;
+                return View("Books", books);
             }
-            
+        }
+
+        [AllowAnonymous]
+        public ActionResult BooksForPurchase()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList();
+                ViewBag.IsForSell = false;
+                return View("Books", books);
+            }
         }
 
         [AllowAnonymous]
