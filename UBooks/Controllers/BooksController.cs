@@ -14,10 +14,39 @@ namespace UBooks.Controllers
     [Authorize]
     public class BooksController : Controller
     {
+        [AllowAnonymous]
+        public ActionResult BooksForSell()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList();
+                ViewBag.IsForSell = true;
+                return View("Books", books);
+            }
+        }
+
+        [AllowAnonymous]
+        public ActionResult BooksForPurchase()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList();
+                ViewBag.IsForSell = false;
+                return View("Books", books);
+            }
+        }
+
         // GET: Books/SellBook
         public ActionResult SellBook()
         {
-            return View();
+            ViewBag.IsForSell = true;
+            return View("AddBook");
+        }
+        // GET: Books/BuyBook
+        public ActionResult BuyBook()
+        {
+            ViewBag.IsForSell = false;
+            return View("AddBook");
         }
 
         [HttpPost]
@@ -55,28 +84,6 @@ namespace UBooks.Controllers
                 await context.SaveChangesAsync();
             }
             return RedirectToAction("BooksForSell");
-        }
-
-        [AllowAnonymous]
-        public ActionResult BooksForSell()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList();
-                ViewBag.IsForSell = true;
-                return View("Books", books);
-            }
-        }
-
-        [AllowAnonymous]
-        public ActionResult BooksForPurchase()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList();
-                ViewBag.IsForSell = false;
-                return View("Books", books);
-            }
         }
 
         [AllowAnonymous]

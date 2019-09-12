@@ -1,7 +1,7 @@
 ﻿@model UBooks.Models.Book
 
 @{
-    ViewBag.Title = "Sell a book";
+    ViewBag.Title = (ViewBag.IsForSell ? "Sell" : "Purchase") + " a book";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -33,7 +33,7 @@
 
 
     @Html.HiddenFor(m => m.Id)
-    <input data-val="true" data-val-required="The IsForSell field is required." id="IsForSell" name="IsForSell" type="hidden" value="true" />
+    <input data-val="true" data-val-required="The IsForSell field is required." id="IsForSell" name="IsForSell" type="hidden" value="@(ViewBag.IsForSell ? "true" : "false")" />
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
