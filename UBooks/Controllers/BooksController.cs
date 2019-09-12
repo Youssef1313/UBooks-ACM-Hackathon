@@ -15,22 +15,28 @@ namespace UBooks.Controllers
     public class BooksController : Controller
     {
         [AllowAnonymous]
-        public ActionResult BooksForSell()
+        public ActionResult BooksForSell(string titleOrAuthor)
         {
             using (var context = new ApplicationDbContext())
             {
-                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList();
+                var books = string.IsNullOrWhiteSpace(titleOrAuthor) 
+                    ? context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList()
+                    : context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell && (b.Title.ToLower().Contains(titleOrAuthor.ToLower()) || b.Author.ToLower().Contains(titleOrAuthor.ToLower()))).ToList();
+
                 ViewBag.IsForSell = true;
                 return View("Books", books);
             }
         }
 
         [AllowAnonymous]
-        public ActionResult BooksForPurchase()
+        public ActionResult BooksForPurchase(string titleOrAuthor)
         {
             using (var context = new ApplicationDbContext())
             {
-                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList();
+                var books = string.IsNullOrWhiteSpace(titleOrAuthor)
+                    ? context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList()
+                    : context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell && (b.Title.ToLower().Contains(titleOrAuthor.ToLower()) || b.Author.ToLower().Contains(titleOrAuthor.ToLower()))).ToList();
+
                 ViewBag.IsForSell = false;
                 return View("Books", books);
             }
@@ -99,5 +105,6 @@ namespace UBooks.Controllers
                 return View(authorizedUserId == book.AdvertisementOwner.Id ? "EditBook" : "ReadOnlyBook", book);
             }
         }
+
     }
 }

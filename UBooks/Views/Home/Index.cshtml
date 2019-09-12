@@ -7,12 +7,24 @@
 <div class="row">
     <div class="col-md-6">
         <h2>Have an old book ?</h2>
-        <p>Click the button below to add a book for sell.</p>
+        <p>Search to see if someone wants to buy it!</p>
+        <form method="GET" action="Books/BooksForPurchase">
+            <label for="titleOrAuthor">Title or author:</label>
+            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/><br/>
+            <button class="btn btn-primary" type="submit">Search</button><br/><br/>
+        </form>
+        <p>Didn't find someone? click the button below to add a book for sell.</p>
         @Html.ActionLink("Sell book", "SellBook", "Books", null, new { @class = "btn btn-default" })
     </div>
     <div class="col-md-6">
         <h2>Can't find an old book ?</h2>
-        <p>Click the button below to ask for a specific book you need.</p>
+        <p>Search to see if someone is selling it!</p>
+        <form method="GET" action="Books/BooksForSell">
+            <label for="titleOrAuthor">Title or author:</label>
+            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/><br/>
+            <button class="btn btn-primary" type="submit">Search</button><br/><br/>
+        </form>
+        <p>Didn't find someone? click the button below to ask for a specific book you need.</p>
         @Html.ActionLink("Buy book", "BuyBook", "Books", null, new { @class = "btn btn-default" })
     </div>
 </div>

@@ -18,6 +18,13 @@ namespace UBooks
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "SearchRoute",
+            //    url: "Books/BooksFor*/{name}",
+            //    defaults: new { name = UrlParameter.Optional }
+            //);
+
         }
     }
 }
