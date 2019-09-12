@@ -15,7 +15,7 @@ namespace UBooks.Controllers
     public class BooksController : Controller
     {
         [AllowAnonymous]
-        public ActionResult BooksForSell(string titleOrAuthor)
+        public ActionResult BooksForSell(string titleOrAuthor, bool? hideExpired)
         {
             using (var context = new ApplicationDbContext())
             {
@@ -23,20 +23,21 @@ namespace UBooks.Controllers
                     ? context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList()
                     : context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell && (b.Title.ToLower().Contains(titleOrAuthor.ToLower()) || b.Author.ToLower().Contains(titleOrAuthor.ToLower()))).ToList();
 
+                if (hideExpired != null && (bool)hideExpired) books = books.Where(b => !b.ExpiredAdvertisement).ToList();
                 ViewBag.IsForSell = true;
                 return View("Books", books);
             }
         }
 
         [AllowAnonymous]
-        public ActionResult BooksForPurchase(string titleOrAuthor)
+        public ActionResult BooksForPurchase(string titleOrAuthor, bool? hideExpired)
         {
             using (var context = new ApplicationDbContext())
             {
                 var books = string.IsNullOrWhiteSpace(titleOrAuthor)
                     ? context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell).ToList()
                     : context.Books.Include(b => b.AdvertisementOwner).Where(b => !b.IsForSell && (b.Title.ToLower().Contains(titleOrAuthor.ToLower()) || b.Author.ToLower().Contains(titleOrAuthor.ToLower()))).ToList();
-
+                if (hideExpired != null && (bool)hideExpired) books = books.Where(b => !b.ExpiredAdvertisement).ToList();
                 ViewBag.IsForSell = false;
                 return View("Books", books);
             }
@@ -48,6 +49,7 @@ namespace UBooks.Controllers
             ViewBag.IsForSell = true;
             return View("AddBook");
         }
+
         // GET: Books/BuyBook
         public ActionResult BuyBook()
         {
@@ -68,7 +70,7 @@ namespace UBooks.Controllers
                 await context.SaveChangesAsync();
             }
 
-            return RedirectToAction("BooksForSell");
+            return RedirectToAction(book.IsForSell ? "BooksForSell" : "BooksForPurchase");
         }
 
         [HttpPost]
@@ -89,7 +91,7 @@ namespace UBooks.Controllers
                 bookInDb.ExpiredAdvertisement = book.ExpiredAdvertisement;
                 await context.SaveChangesAsync();
             }
-            return RedirectToAction("BooksForSell");
+            return RedirectToAction(book.IsForSell ? "BooksForSell" : "BooksForPurchase");
         }
 
         [AllowAnonymous]

@@ -10,7 +10,12 @@
         <p>Search to see if someone wants to buy it!</p>
         <form method="GET" action="Books/BooksForPurchase">
             <label for="titleOrAuthor">Title or author:</label>
-            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/><br/>
+            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/>
+            <div class="checkbox">
+                <label>
+                    <input checked="checked" name="hideExpired" type="checkbox" value="true"> Hide expired advertisements.
+                </label>
+            </div>
             <button class="btn btn-primary" type="submit">Search</button><br/><br/>
         </form>
         <p>Didn't find someone? click the button below to add a book for sell.</p>
@@ -21,7 +26,12 @@
         <p>Search to see if someone is selling it!</p>
         <form method="GET" action="Books/BooksForSell">
             <label for="titleOrAuthor">Title or author:</label>
-            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/><br/>
+            <input class="form-control" id="titleOrAuthor" type="text" name="titleOrAuthor"/>
+            <div class="checkbox">
+                <label>
+                    <input checked="checked" name="hideExpired" type="checkbox" value="true"> Hide expired advertisements.
+                </label>
+            </div>
             <button class="btn btn-primary" type="submit">Search</button><br/><br/>
         </form>
         <p>Didn't find someone? click the button below to ask for a specific book you need.</p>
