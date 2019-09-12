@@ -226,6 +226,10 @@
     <Compile Include="Migrations\201909121206006_MakeSomeFieldsRequired.Designer.cs">
       <DependentUpon>201909121206006_MakeSomeFieldsRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909121209472_AddExpiredAdvertisement.cs" />
+    <Compile Include="Migrations\201909121209472_AddExpiredAdvertisement.Designer.cs">
+      <DependentUpon>201909121209472_AddExpiredAdvertisement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909121206006_MakeSomeFieldsRequired.resx">
       <DependentUpon>201909121206006_MakeSomeFieldsRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909121209472_AddExpiredAdvertisement.resx">
+      <DependentUpon>201909121209472_AddExpiredAdvertisement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
