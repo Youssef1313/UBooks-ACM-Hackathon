@@ -301,6 +301,7 @@
     <Content Include="Views\Books\SellBook.cshtml" />
     <Content Include="Views\Books\BooksForSell.cshtml" />
     <Content Include="Views\Books\ReadOnlyBook.cshtml" />
+    <Content Include="Views\Books\EditBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

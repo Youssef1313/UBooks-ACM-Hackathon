@@ -13,6 +13,7 @@
         <tr>
             <th>Title</th>
             <th>Author</th>
+            <th>Seller</th>
             <th>Advertisement Date</th>
             <th>Is Expired Advertisement</th>
         </tr>
@@ -23,6 +24,7 @@
         <tr>
             <td>@Html.ActionLink(book.Title, "Details", new {id = book.Id})</td>
             <td>@book.Author</td>
+            <td>@book.AdvertisementOwner.UserName</td>
             <td>@book.AddedDate</td>
             <td>@(book.ExpiredAdvertisement ? "Yes" : "No")</td>
         </tr>

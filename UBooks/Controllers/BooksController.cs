@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,7 @@ namespace UBooks.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(Book book)
         {
             string authorizedUserId = User.Identity.GetUserId();
@@ -31,6 +33,27 @@ namespace UBooks.Controllers
                 await context.SaveChangesAsync();
             }
 
+            return RedirectToAction("BooksForSell");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Book book)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var bookInDb = await context.Books.Include(b => b.AdvertisementOwner).FirstOrDefaultAsync(b => b.Id == book.Id);
+                if (bookInDb == null) return HttpNotFound();
+
+                string authorizedUserId = User.Identity.GetUserId();
+                if (authorizedUserId != bookInDb.AdvertisementOwner.Id) return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                bookInDb.Title = book.Title;
+                bookInDb.Author = book.Author;
+                bookInDb.Description = book.Description;
+                bookInDb.PublishDate = book.PublishDate;
+                bookInDb.ExpiredAdvertisement = book.ExpiredAdvertisement;
+                await context.SaveChangesAsync();
+            }
             return RedirectToAction("BooksForSell");
         }
 
@@ -55,11 +78,7 @@ namespace UBooks.Controllers
                 if (book == null) return HttpNotFound();
 
                 string authorizedUserId = User.Identity.GetUserId();
-                if (authorizedUserId == book.AdvertisementOwner.Id)
-                {
-                    // TODO: Redirect to edit book page.
-                }
-                return View("ReadOnlyBook", book);
+                return View(authorizedUserId == book.AdvertisementOwner.Id ? "EditBook" : "ReadOnlyBook", book);
             }
         }
     }

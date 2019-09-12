@@ -24,6 +24,7 @@ namespace UBooks.Models
         public DateTime PublishDate { get; set; }
 
         [Required]
+        [Display(Name = "Advertisement Date")]
         public DateTime AddedDate { get; set; }
 
         [Required]
