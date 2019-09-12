@@ -21,7 +21,7 @@ namespace UBooks.Models
 
         public DateTime AddedDate { get; set; }
 
-        public ApplicationUser SellerOrBuyer { get; set; }
+        public ApplicationUser AdvertisementOwner { get; set; }
 
         public bool IsForSell { get; set; }
     }

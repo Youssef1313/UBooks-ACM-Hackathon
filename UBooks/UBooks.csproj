@@ -214,6 +214,14 @@
     <Compile Include="Migrations\201909121042195_EditBookModel.Designer.cs">
       <DependentUpon>201909121042195_EditBookModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909121149269_EditBookModel1.cs" />
+    <Compile Include="Migrations\201909121149269_EditBookModel1.Designer.cs">
+      <DependentUpon>201909121149269_EditBookModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909121153173_EditBookModelAgain.cs" />
+    <Compile Include="Migrations\201909121153173_EditBookModelAgain.Designer.cs">
+      <DependentUpon>201909121153173_EditBookModelAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -304,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909121042195_EditBookModel.resx">
       <DependentUpon>201909121042195_EditBookModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909121149269_EditBookModel1.resx">
+      <DependentUpon>201909121149269_EditBookModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909121153173_EditBookModelAgain.resx">
+      <DependentUpon>201909121153173_EditBookModelAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
