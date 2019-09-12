@@ -31,5 +31,8 @@ namespace UBooks.Models
 
         [Required]
         public bool IsForSell { get; set; }
+
+        [Required]
+        public bool ExpiredAdvertisement { get; set; }
     }
 }
