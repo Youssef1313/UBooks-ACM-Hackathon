@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201909121153173_EditBookModelAgain.Designer.cs">
       <DependentUpon>201909121153173_EditBookModelAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909121206006_MakeSomeFieldsRequired.cs" />
+    <Compile Include="Migrations\201909121206006_MakeSomeFieldsRequired.Designer.cs">
+      <DependentUpon>201909121206006_MakeSomeFieldsRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -318,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909121153173_EditBookModelAgain.resx">
       <DependentUpon>201909121153173_EditBookModelAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909121206006_MakeSomeFieldsRequired.resx">
+      <DependentUpon>201909121206006_MakeSomeFieldsRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

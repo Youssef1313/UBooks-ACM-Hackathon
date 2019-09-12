@@ -7,7 +7,7 @@ using UBooks.Models;
 
 namespace UBooks.Controllers
 {
-    // TODO: Remove comment [Authorize]
+    [Authorize]
     public class BooksController : Controller
     {
         // GET: Books/SellBook
@@ -19,7 +19,12 @@ namespace UBooks.Controllers
         [HttpPost]
         public ActionResult Add(Book book)
         {
-            return HttpNotFound();
+            book.AddedDate = DateTime.Now;
+            var context = new ApplicationDbContext();
+            context.Books.Add(book);
+            context.SaveChangesAsync();
+            // TODO: Later, redirect to page that shows Books for sell.
+            return RedirectToAction("Index", "Home");
         }
     }
 }
