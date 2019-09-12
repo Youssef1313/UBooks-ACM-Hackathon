@@ -21,7 +21,7 @@ namespace UBooks.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Book> Books { get; set; }
+        //public DbSet<Book> Books { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
