@@ -13,7 +13,8 @@ namespace UBooks.Models
         public string Author { get; set; }
         public DateTime PublishDate { get; set; }
         public DateTime SellDate { get; set; }
-        public ApplicationUser Seller { get; set; }
+        public ApplicationUser SellerOrBuyer { get; set; }
+        public bool IsForSell { get; set; }
 
     }
 }
