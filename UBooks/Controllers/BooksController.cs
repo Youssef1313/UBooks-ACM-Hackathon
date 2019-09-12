@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UBooks.Models;
@@ -17,14 +19,27 @@ namespace UBooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Book book)
+        public async Task<ActionResult> Add(Book book)
         {
             book.AddedDate = DateTime.Now;
-            var context = new ApplicationDbContext();
-            context.Books.Add(book);
-            context.SaveChangesAsync();
-            // TODO: Later, redirect to page that shows Books for sell.
-            return RedirectToAction("Index", "Home");
+            using (var context = new ApplicationDbContext())
+            {
+                context.Books.Add(book);
+                await context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("BooksForSell");
+        }
+
+        [AllowAnonymous]
+        public ActionResult BooksForSell()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var books = context.Books.Include(b => b.AdvertisementOwner).Where(b => b.IsForSell).ToList();
+                return View(books);
+            }
+            
         }
     }
 }

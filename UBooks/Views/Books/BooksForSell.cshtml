@@ -1,0 +1,31 @@
+﻿@model IEnumerable<UBooks.Models.Book>
+
+@{
+    ViewBag.Title = "Books for sell";
+}
+
+@* Book Published Date, Advertisement Date, Author, Is Expired *@
+
+<h2>Books for sell</h2>
+
+<table id="books" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Advertisement Date</th>
+            <th>Is Expired</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.AddedDate</td>
+            <td>@book.ExpiredAdvertisement</td>
+        </tr>
+    }
+    </tbody>
+</table>
